@@ -1,0 +1,24 @@
+diff -up file-roller-2.28.2/src/fr-command-tar.c.fix7z file-roller-2.28.2/src/fr-command-tar.c
+--- file-roller-2.28.2/src/fr-command-tar.c.fix7z	2009-12-15 03:46:24.000000000 -0500
++++ file-roller-2.28.2/src/fr-command-tar.c	2010-05-24 12:32:10.940703312 -0400
+@@ -658,7 +658,7 @@ fr_command_tar_recompress (FrCommand *co
+ 		fr_process_add_arg (comm->process, "-l");
+ 
+ 		new_name = g_strconcat (c_tar->uncomp_filename, ".7z", NULL);
+-		fr_process_add_arg_concat (comm->process, new_name);
++		fr_process_add_arg_concat (comm->process, new_name, NULL);
+ 
+ 		fr_process_add_arg (comm->process, c_tar->uncomp_filename);
+ 		fr_process_end_command (comm->process);
+diff -up file-roller-2.28.2/src/fr-process.h.fix7z file-roller-2.28.2/src/fr-process.h
+--- file-roller-2.28.2/src/fr-process.h.fix7z	2009-04-30 04:47:42.000000000 -0400
++++ file-roller-2.28.2/src/fr-process.h	2010-05-24 12:31:09.974712323 -0400
+@@ -97,7 +97,7 @@ void        fr_process_add_arg          
+ 					     const char   *arg);
+ void        fr_process_add_arg_concat       (FrProcess    *fr_proc,
+ 					     const char   *arg,
+-					     ...);
++					     ...) G_GNUC_NULL_TERMINATED;
+ void        fr_process_add_arg_printf       (FrProcess    *fr_proc,
+ 					     const char   *format,
+ 					     ...) G_GNUC_PRINTF (2, 3);
